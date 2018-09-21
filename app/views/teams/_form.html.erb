@@ -1,22 +1,18 @@
-<%= form_with(model: team, local: true) do |form| %>
-  <% if team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+<%= content_tag :div,
+id: "team-form",
+data: {
+  team: team.to_json(except: [:created_at, :updated_at]),
+  players_attributes: team.players.to_json(except: [:team_id, :created_at, :updated_at])
+} do %>
+  <label>Team Name</label>
+  <input type="text" v-model="team.name"/>
 
-      <ul>
-      <% team.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <h4>Players</h4>
+  <div v-for="(player, index) in team.players_attributes">
+    <label>Player Name</label>
+    <input type="text" v-model="player.name"/>
+    <button @click="removePlayer(index)">Remove Player</button>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <button @click="addPlayer">Add Player</button>
 <% end %>
