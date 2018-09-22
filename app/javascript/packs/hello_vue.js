@@ -29,7 +29,7 @@ document.addEventListener("turbolinks:load", () => {
         },
         methods: {
           addPlayer() {
-            team.players_attributes.push({
+            this.team.players_attributes.push({
               id: null,
               name: "",
               position: "",
@@ -37,7 +37,33 @@ document.addEventListener("turbolinks:load", () => {
             })
           },
           removePlayer(index) {
-            this.team.players_attributes.splice(index, 1);
+            let player = this.team.players_attributes[index];
+            if (player.id) {
+              player._destroy = "1";
+            } else {
+              this.team.players_attributes.splice(index, 1);
+            }
+          },
+          undoRemove(index) {
+            this.team.players_attributes[index]._destroy = null;
+          },
+          saveTeam() {
+            // Edit an existing team
+            if (this.team.id) {
+              this.$http.put(`/teams/${this.team.id}`, { team: this.team }).then(res => {
+                Turbolinks.visit(`/teams/${res.body.id}`);
+              }, err => {
+                console.log(err);
+              })
+
+            // Create a new team
+            } else {
+              this.$http.post("/teams", { team: this.team }).then(res => {
+                Turbolinks.visit(`/teams/${res.body.id}`);
+              }, err => {
+                console.log(err);
+              })
+            }
           }
         }
     })
