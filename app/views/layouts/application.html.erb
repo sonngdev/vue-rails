@@ -5,12 +5,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag    'https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag    'hello_vue' %>
+    <%= javascript_pack_tag    'application' %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <div class="container" data-behavior="vue">
+      <%= yield %>
+    </div>
   </body>
 </html>
