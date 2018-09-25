@@ -16,9 +16,18 @@
       <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
         Examples
       </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
-        Features
-      </a>
+
+      <dropdown>
+        <a slot="link" href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
+          Features
+        </a>
+        <div slot="dropdown-items" class="bf-white shadow rounded border overflow-hidden">
+          <%= link_to "Blog", "#", class: "no-underline block px-4 py-3 border-b text-grey-darkest bg-white hover:text-white hover:bg-blue" %>
+          <%= link_to "Blog", "#", class: "no-underline block px-4 py-3 border-b text-grey-darkest bg-white hover:text-white hover:bg-blue" %>
+          <%= link_to "Blog", "#", class: "no-underline block px-4 py-3 border-b text-grey-darkest bg-white hover:text-white hover:bg-blue" %>
+          <%= link_to "Blog", "#", class: "no-underline block px-4 py-3 border-b text-grey-darkest bg-white hover:text-white hover:bg-blue" %>
+        </div>
+      </dropdown>
     </div>
     <div>
       <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white mt-4 lg:mt-0">Download</a>
